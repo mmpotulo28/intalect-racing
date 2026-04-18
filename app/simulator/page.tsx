@@ -162,40 +162,49 @@ export default function SimulatorPage() {
 	};
 
 	return (
-		<section className='flex flex-col gap-6 py-8 md:py-10'>
-			<div>
-				<h1 className={title({ color: "blue" })}>Simulator Workspace</h1>
-				<p className={subtitle()}>Upload or paste a race level, validate it with strict schema rules, then generate a deterministic starter strategy export.</p>
+		<section className='flex flex-col gap-6 py-8 md:py-10 max-w-6xl mx-auto'>
+			<div className='mb-4'>
+				<div className='inline-block px-3 py-1 bg-danger/10 text-danger text-xs font-bold uppercase tracking-widest rounded-full mb-3'>Simulation Environment</div>
+				<h1 className={title({ size: "lg", class: "block italic tracking-tight" })}>
+					RACE <span className='text-danger'>COMMAND</span>
+				</h1>
+				<p className={subtitle({ class: "mt-4 max-w-2xl" })}>Upload or paste a race level, validate it with strict schema rules, then generate a deterministic starter strategy export.</p>
 			</div>
 
-			<div className='grid gap-4 lg:grid-cols-2'>
-				<div className='rounded-xl border border-separator bg-surface p-4'>
-					<h2 className='text-lg font-semibold text-foreground'>1) Level Input</h2>
-					<p className='mt-1 text-sm text-muted'>Use file upload, raw JSON paste, or load the bundled sample level.</p>
+			<div className='grid gap-6 lg:grid-cols-2'>
+				<div className='rounded-2xl border border-white/10 bg-[#0a0f1c]/80 backdrop-blur-xl shadow-2xl p-6'>
+					<h2 className='text-lg font-bold italic uppercase tracking-wider text-white flex items-center gap-2'>
+						<span className='w-2 h-6 bg-danger rounded-sm'></span>
+						1. Level Data
+					</h2>
+					<p className='mt-2 text-sm text-white/50'>Use file upload, raw JSON paste, or load the bundled sample level.</p>
 
-					<div className='mt-3 flex flex-wrap gap-2'>
-						<button className='button button--primary button--sm rounded-full' onClick={onLoadSample} type='button'>
+					<div className='mt-5 flex flex-wrap gap-3'>
+						<button className='px-4 py-2 bg-danger text-white text-xs font-bold uppercase tracking-wider rounded-md hover:bg-danger/80 transition-colors' onClick={onLoadSample} type='button'>
 							Load Sample
 						</button>
-						<label className='button button--tertiary button--sm rounded-full cursor-pointer'>
+						<label className='px-4 py-2 bg-white/5 text-white/90 text-xs font-bold uppercase tracking-wider rounded-md hover:bg-white/10 transition-colors cursor-pointer border border-white/10'>
 							Upload JSON <input accept='application/json,.json' className='hidden' onChange={(event) => void onUploadFile(event.target.files?.[0] ?? null)} type='file' />
 						</label>
-						<button className='button button--tertiary button--sm rounded-full' onClick={onValidateLevel} type='button'>
+						<button className='px-4 py-2 bg-white/5 text-white/90 text-xs font-bold uppercase tracking-wider rounded-md hover:bg-white/10 transition-colors border border-white/10' onClick={onValidateLevel} type='button'>
 							Validate Level
 						</button>
 					</div>
 
-					<textarea className='mt-3 min-h-64 w-full rounded-lg border border-separator bg-background px-3 py-2 font-mono text-sm text-foreground' onChange={(event) => setLevelInput(event.target.value)} placeholder='Paste level JSON here...' value={levelInput} />
+					<textarea className='mt-5 min-h-[320px] w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 font-mono text-[13px] text-white/80 focus:border-danger/50 focus:ring-1 focus:ring-danger/50 transition-all resize-y' onChange={(event) => setLevelInput(event.target.value)} placeholder='Paste level JSON here...' value={levelInput} />
 				</div>
 
-				<div className='rounded-xl border border-separator bg-surface p-4'>
-					<h2 className='text-lg font-semibold text-foreground'>2) Validation + Starter Strategy</h2>
-					<p className='mt-1 text-sm text-muted'>Validation issues appear below. Strategy generation and simulation are enabled once validation succeeds.</p>
+				<div className='rounded-2xl border border-white/10 bg-[#0a0f1c]/80 backdrop-blur-xl shadow-2xl p-6'>
+					<h2 className='text-lg font-bold italic uppercase tracking-wider text-white flex items-center gap-2'>
+						<span className='w-2 h-6 bg-danger rounded-sm'></span>
+						2. Strategy Engine
+					</h2>
+					<p className='mt-2 text-sm text-white/50'>Validation issues appear below. Strategy generation and simulation are enabled once validation succeeds.</p>
 
-					<p className='mt-3 rounded-lg bg-background px-3 py-2 text-sm text-muted'>{statusMessage}</p>
+					<div className='mt-4 rounded-lg bg-danger/10 border border-danger/20 px-4 py-3 text-sm text-danger/90 font-medium'>{statusMessage}</div>
 
 					{validationIssues.length > 0 ? (
-						<ul className='mt-3 list-disc space-y-1 pl-5 text-sm text-danger'>
+						<ul className='mt-4 list-disc space-y-1 pl-5 text-sm text-danger bg-danger/5 p-4 rounded-lg border border-danger/20'>
 							{validationIssues.map((issue) => (
 								<li key={issue}>{issue}</li>
 							))}
@@ -203,70 +212,121 @@ export default function SimulatorPage() {
 					) : null}
 
 					{parsedSummary ? (
-						<div className='mt-3 rounded-lg border border-separator bg-background p-3 text-sm text-foreground'>
-							<p className='font-semibold'>Parsed Level Summary</p>
-							<p className='mt-1'>Track: {parsedSummary.trackName}</p>
-							<p>Laps: {parsedSummary.laps}</p>
-							<p>Segments: {parsedSummary.segments}</p>
-							<p>Weather states: {parsedSummary.weatherStates}</p>
-							<p>Total available tyre ids: {parsedSummary.tyreSetCount}</p>
+						<div className='mt-4 flex flex-wrap gap-2 text-xs'>
+							<div className='bg-white/5 border border-white/10 rounded-md px-3 py-2 flex flex-col'>
+								<span className='text-white/40 uppercase tracking-wider mb-1'>Track</span>
+								<span className='text-white font-medium'>{parsedSummary.trackName}</span>
+							</div>
+							<div className='bg-white/5 border border-white/10 rounded-md px-3 py-2 flex flex-col'>
+								<span className='text-white/40 uppercase tracking-wider mb-1'>Laps</span>
+								<span className='text-white font-medium'>{parsedSummary.laps}</span>
+							</div>
+							<div className='bg-white/5 border border-white/10 rounded-md px-3 py-2 flex flex-col'>
+								<span className='text-white/40 uppercase tracking-wider mb-1'>Segments</span>
+								<span className='text-white font-medium'>{parsedSummary.segments}</span>
+							</div>
+							<div className='bg-white/5 border border-white/10 rounded-md px-3 py-2 flex flex-col'>
+								<span className='text-white/40 uppercase tracking-wider mb-1'>Weather</span>
+								<span className='text-white font-medium'>{parsedSummary.weatherStates}</span>
+							</div>
+							<div className='bg-white/5 border border-white/10 rounded-md px-3 py-2 flex flex-col'>
+								<span className='text-white/40 uppercase tracking-wider mb-1'>Tyres</span>
+								<span className='text-white font-medium'>{parsedSummary.tyreSetCount}</span>
+							</div>
 						</div>
 					) : null}
 
-					<div className='mt-3 flex flex-wrap gap-2'>
-						<button className='button button--primary button--sm rounded-full' onClick={onGenerateStrategy} type='button'>
-							Generate Starter Strategy
+					<div className='mt-5 flex flex-wrap gap-3'>
+						<button className='px-4 py-2 bg-danger text-white text-xs font-bold uppercase tracking-wider rounded-md hover:bg-danger/80 transition-colors' onClick={onGenerateStrategy} type='button'>
+							Generate Strategy
 						</button>
-						<button className='button button--primary button--sm rounded-full' onClick={onRunSimulation} type='button'>
+						<button className='px-4 py-2 bg-white text-black text-xs font-bold uppercase tracking-wider rounded-md hover:bg-white/80 transition-colors' onClick={onRunSimulation} type='button'>
 							Run Simulation
 						</button>
-						<button className='button button--tertiary button--sm rounded-full' onClick={onDownloadStrategy} type='button'>
-							Download TXT
+						<button className='px-3 py-2 bg-transparent text-white/70 hover:text-white text-xs font-bold uppercase tracking-wider rounded-md hover:bg-white/10 transition-colors border border-transparent hover:border-white/10' onClick={onDownloadStrategy} type='button'>
+							TXT
 						</button>
-						<button className='button button--tertiary button--sm rounded-full' onClick={onDownloadStrategyJson} type='button'>
-							Download JSON
+						<button className='px-3 py-2 bg-transparent text-white/70 hover:text-white text-xs font-bold uppercase tracking-wider rounded-md hover:bg-white/10 transition-colors border border-transparent hover:border-white/10' onClick={onDownloadStrategyJson} type='button'>
+							JSON
 						</button>
 					</div>
 
-					<textarea className='mt-3 min-h-64 w-full rounded-lg border border-separator bg-background px-3 py-2 font-mono text-sm text-foreground' placeholder='Generated strategy output appears here...' readOnly value={strategyOutput} />
+					<textarea className='mt-5 min-h-[160px] w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 font-mono text-[13px] text-white/60 focus:border-danger/50 focus:ring-1 focus:ring-danger/50 transition-all resize-y' placeholder='Generated strategy output appears here...' readOnly value={strategyOutput} />
 				</div>
 			</div>
 
 			{simulationResult ? (
-				<div className='rounded-xl border border-separator bg-surface p-4'>
-					<h2 className='text-lg font-semibold text-foreground'>3) Simulation Results (First Pass)</h2>
-					<div className='mt-3 grid gap-3 md:grid-cols-3 xl:grid-cols-4'>
-						<div className='rounded-lg bg-background p-3'>
-							<p className='text-xs uppercase text-muted'>Total Time</p>
-							<p className='text-lg font-semibold text-foreground'>{simulationResult.total_time_s.toFixed(2)} s</p>
+				<div className='rounded-2xl border border-white/10 bg-[#0a0f1c]/80 backdrop-blur-xl shadow-2xl p-6 mt-4'>
+					<h2 className='text-lg font-bold italic uppercase tracking-wider text-white flex items-center gap-2 mb-6'>
+						<span className='w-2 h-6 bg-danger rounded-sm'></span>
+						3. Telemetry Results
+					</h2>
+					<div className='grid gap-4 sm:grid-cols-2 md:grid-cols-4'>
+						<div className='rounded-xl bg-black/40 border border-white/5 p-4 flex flex-col justify-between'>
+							<div className='flex items-center gap-2 mb-2'>
+								<div className='w-2 h-2 rounded-full bg-blue-500'></div>
+								<p className='text-[10px] uppercase font-bold tracking-widest text-white/50'>Total Time</p>
+							</div>
+							<p className='text-2xl font-mono text-white/90'>
+								{simulationResult.total_time_s.toFixed(2)}
+								<span className='text-sm text-white/40 ml-1'>s</span>
+							</p>
 						</div>
-						<div className='rounded-lg bg-background p-3'>
-							<p className='text-xs uppercase text-muted'>Fuel Used</p>
-							<p className='text-lg font-semibold text-foreground'>{simulationResult.fuel_used_l.toFixed(3)} L</p>
+						<div className='rounded-xl bg-black/40 border border-white/5 p-4 flex flex-col justify-between'>
+							<div className='flex items-center gap-2 mb-2'>
+								<div className='w-2 h-2 rounded-full bg-yellow-500'></div>
+								<p className='text-[10px] uppercase font-bold tracking-widest text-white/50'>Fuel Used</p>
+							</div>
+							<p className='text-2xl font-mono text-white/90'>
+								{simulationResult.fuel_used_l.toFixed(2)}
+								<span className='text-sm text-white/40 ml-1'>L</span>
+							</p>
 						</div>
-						<div className='rounded-lg bg-background p-3'>
-							<p className='text-xs uppercase text-muted'>Fuel Remaining</p>
-							<p className='text-lg font-semibold text-foreground'>{simulationResult.fuel_remaining_l.toFixed(3)} L</p>
+						<div className='rounded-xl bg-black/40 border border-white/5 p-4 flex flex-col justify-between'>
+							<div className='flex items-center gap-2 mb-2'>
+								<div className='w-2 h-2 rounded-full bg-green-500'></div>
+								<p className='text-[10px] uppercase font-bold tracking-widest text-white/50'>Fuel Remaining</p>
+							</div>
+							<p className='text-2xl font-mono text-white/90'>
+								{simulationResult.fuel_remaining_l.toFixed(2)}
+								<span className='text-sm text-white/40 ml-1'>L</span>
+							</p>
 						</div>
-						<div className='rounded-lg bg-background p-3'>
-							<p className='text-xs uppercase text-muted'>Tyre Degradation</p>
-							<p className='text-lg font-semibold text-foreground'>{simulationResult.total_tyre_degradation.toFixed(4)}</p>
+						<div className='rounded-xl bg-black/40 border border-white/5 p-4 flex flex-col justify-between'>
+							<div className='flex items-center gap-2 mb-2'>
+								<div className='w-2 h-2 rounded-full bg-orange-500'></div>
+								<p className='text-[10px] uppercase font-bold tracking-widest text-white/50'>Deagradation</p>
+							</div>
+							<p className='text-2xl font-mono text-white/90'>{simulationResult.total_tyre_degradation.toFixed(3)}</p>
 						</div>
-						<div className='rounded-lg bg-background p-3'>
-							<p className='text-xs uppercase text-muted'>Crashes</p>
-							<p className='text-lg font-semibold text-foreground'>{simulationResult.crashes}</p>
+						<div className='rounded-xl bg-black/40 border border-white/5 p-4 flex flex-col justify-between'>
+							<div className='flex items-center gap-2 mb-2'>
+								<div className='w-2 h-2 rounded-full bg-danger'></div>
+								<p className='text-[10px] uppercase font-bold tracking-widest text-white/50'>Crashes</p>
+							</div>
+							<p className='text-2xl font-mono text-white/90'>{simulationResult.crashes}</p>
 						</div>
-						<div className='rounded-lg bg-background p-3'>
-							<p className='text-xs uppercase text-muted'>Blowouts</p>
-							<p className='text-lg font-semibold text-foreground'>{simulationResult.blowouts}</p>
+						<div className='rounded-xl bg-black/40 border border-white/5 p-4 flex flex-col justify-between'>
+							<div className='flex items-center gap-2 mb-2'>
+								<div className='w-2 h-2 rounded-full bg-danger'></div>
+								<p className='text-[10px] uppercase font-bold tracking-widest text-white/50'>Blowouts</p>
+							</div>
+							<p className='text-2xl font-mono text-white/90'>{simulationResult.blowouts}</p>
 						</div>
-						<div className='rounded-lg bg-background p-3'>
-							<p className='text-xs uppercase text-muted'>Base Score</p>
-							<p className='text-lg font-semibold text-foreground'>{simulationResult.score.base_score.toFixed(2)}</p>
+						<div className='rounded-xl bg-black/40 border border-white/5 p-4 flex flex-col justify-between'>
+							<div className='flex items-center gap-2 mb-2'>
+								<div className='w-2 h-2 rounded-full bg-purple-500'></div>
+								<p className='text-[10px] uppercase font-bold tracking-widest text-white/50'>Base Score</p>
+							</div>
+							<p className='text-2xl font-mono text-white/90'>{simulationResult.score.base_score.toFixed(2)}</p>
 						</div>
-						<div className='rounded-lg bg-background p-3'>
-							<p className='text-xs uppercase text-muted'>Final Score</p>
-							<p className='text-lg font-semibold text-foreground'>{simulationResult.score.final_score.toFixed(2)}</p>
+						<div className='rounded-xl bg-gradient-to-br from-danger/20 to-black/40 border border-danger/30 p-4 flex flex-col justify-between relative overflow-hidden'>
+							<div className='absolute -right-4 -bottom-4 text-danger/10 text-6xl italic font-black'>GP</div>
+							<div className='flex items-center gap-2 mb-2 relative z-10'>
+								<div className='w-2 h-2 rounded-full bg-danger animate-pulse'></div>
+								<p className='text-[10px] uppercase font-bold tracking-widest text-danger'>Final Score</p>
+							</div>
+							<p className='text-3xl font-mono text-white font-bold relative z-10 shadow-sm'>{simulationResult.score.final_score.toFixed(2)}</p>
 						</div>
 					</div>
 

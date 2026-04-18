@@ -64,35 +64,31 @@
 .dark,
 [data-theme="dark"] {
 	color-scheme: dark;
-	/* Theme Colors (Dark Mode) */
-	--accent: oklch(58.14% 0.2349 27.99);
-	--accent-foreground: oklch(99.11% 0 0);
-	--background: oklch(12% 0 27.99);
-	--border: oklch(28% 0 27.99);
-	--danger: oklch(59.4% 0.1967 357.53);
-	--danger-foreground: oklch(99.11% 0 0);
-	--default: oklch(27.4% 0 27.99);
-	--default-foreground: oklch(99.11% 0 0);
-	--field-background: oklch(21.03% 0 27.99);
-	--field-foreground: oklch(99.11% 0 27.99);
-	--field-placeholder: oklch(70.5% 0 27.99);
-	--focus: oklch(58.14% 0.2349 27.99);
-	--foreground: oklch(99.11% 0 27.99);
-	--muted: oklch(70.5% 0 27.99);
-	--overlay: oklch(21.03% 0 27.99);
-	--overlay-foreground: oklch(99.11% 0 27.99);
-	--scrollbar: oklch(70.5% 0 27.99);
-	--segment: oklch(39.64% 0 27.99);
-	--segment-foreground: oklch(99.11% 0 27.99);
-	--separator: oklch(25% 0 27.99);
-	--success: oklch(73.29% 0.1935 123.71);
-	--success-foreground: oklch(21.03% 0.0059 123.71);
-	--surface: oklch(21.03% 0 27.99);
-	--surface-foreground: oklch(99.11% 0 27.99);
-	--surface-secondary: oklch(25.7% 0 27.99);
-	--surface-secondary-foreground: oklch(99.11% 0 27.99);
-	--surface-tertiary: oklch(27.21% 0 27.99);
-	--surface-tertiary-foreground: oklch(99.11% 0 27.99);
-	--warning: oklch(82.03% 0.1388 49.24);
-	--warning-foreground: oklch(21.03% 0.0059 49.24);
+	/* Theme Colors (Dark Mode) - Racing Theme Refit */
+	--background: oklch(20% 0.03 260); /* Deep midnight blue */
+	--foreground: oklch(98% 0 0); /* White text */
+	--accent: oklch(50% 0.2 260); /* Electric Blue */
+	--accent-foreground: oklch(98% 0 0);
+	--danger: oklch(60% 0.23 30); /* Bright Racing Red */
+	--danger-foreground: oklch(99% 0 0);
+
+	/* Surfaces & Borders */
+	--surface: oklch(25% 0.04 260);
+	--surface-foreground: oklch(95% 0 0);
+	--border: oklch(35% 0.05 260);
+	--separator: oklch(35% 0.05 260);
+
+	/* Default UI Elements */
+	--default: oklch(30% 0.04 260);
+	--default-foreground: oklch(98% 0 0);
+	--field-background: oklch(22% 0.03 260);
+	--field-foreground: oklch(98% 0 0);
+	--field-placeholder: oklch(65% 0.02 260);
+
+	--muted: oklch(65% 0.02 260);
+	--focus: oklch(60% 0.23 30); /* Focus as red */
+
+	/* Contextual */
+	--success: oklch(65% 0.18 160);
+	--warning: oklch(80% 0.15 80);
 }
