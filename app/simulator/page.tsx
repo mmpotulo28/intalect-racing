@@ -258,7 +258,7 @@ export default function SimulatorPage() {
 			{simulationResult ? (
 				<div className='rounded-2xl border border-white/10 bg-[#0a0f1c]/80 backdrop-blur-xl shadow-2xl p-6 mt-4'>
 					<h2 className='text-lg font-bold italic uppercase tracking-wider text-white flex items-center gap-2 mb-6'>
-						<span className='w-2 h-6 bg-danger rounded-sm'></span>
+						<span className='w-2 h-6 bg-danger rounded-sm' />
 						3. Telemetry Results
 					</h2>
 					<div className='grid gap-4 sm:grid-cols-2 md:grid-cols-4'>
