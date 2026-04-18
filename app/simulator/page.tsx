@@ -239,15 +239,15 @@ export default function SimulatorPage() {
 					) : null}
 
 					<div className='mt-5 flex flex-wrap gap-3'>
-						<OptimizerDashboard 
-							level={levelConfig} 
+						<OptimizerDashboard
+							level={levelConfig}
 							onStrategyFound={(plan) => {
 								setStrategyPlan(plan);
 								setStrategyOutput(deterministicJsonStringify(plan));
 								setStatusMessage("Optimized strategy generated automatically.");
-							}} 
+							}}
 						/>
-						
+
 						<button className='px-4 py-2 bg-danger text-white text-xs font-bold uppercase tracking-wider rounded-md hover:bg-danger/80 transition-colors' onClick={onGenerateStrategy} type='button'>
 							Generate Target Strategy
 						</button>

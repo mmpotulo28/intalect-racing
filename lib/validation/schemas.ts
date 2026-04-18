@@ -89,13 +89,22 @@ const weatherSchema = z.object({
 	conditions: z.array(weatherEntrySchema).min(1),
 });
 
-export const levelSchema = z.object({
-	car: carSchema,
-	race: raceSchema,
-	track: trackSchema,
-	tyres: tyresSchema,
-	weather: weatherSchema,
-});
+export const levelSchema = z.preprocess(
+	(val: any) => {
+		// Handle case where available_sets is at the root instead of inside tyres
+		if (val && typeof val === "object" && val.available_sets && val.tyres && !val.tyres.available_sets) {
+			val.tyres.available_sets = val.available_sets;
+		}
+		return val;
+	},
+	z.object({
+		car: carSchema,
+		race: raceSchema,
+		track: trackSchema,
+		tyres: tyresSchema,
+		weather: weatherSchema,
+	}),
+);
 
 const strategyStraightSchema = z.object({
 	id: z.number().int().positive(),
