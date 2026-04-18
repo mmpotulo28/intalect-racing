@@ -47,7 +47,7 @@ const trackSchema = z.object({
 });
 
 const tyrePropertySchema = z.object({
-	base_friction_coefficient: z.number().positive(),
+	base_friction_coefficient: z.number().positive().optional().default(1.0),
 	life_span: z.number().positive(),
 	dry_friction_multiplier: z.number().positive(),
 	cold_friction_multiplier: z.number().positive(),

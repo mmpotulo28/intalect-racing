@@ -9,6 +9,8 @@ import { simulateRace } from "@/lib/simulation/engine";
 import { buildStarterStrategy } from "@/lib/simulation/strategy-template";
 import type { LevelConfig, SimulationResult, StrategyPlan, ValidationIssue } from "@/lib/types/racing";
 import { validateLevelConfig, validateStrategyPlan } from "@/lib/validation/schemas";
+import { TelemetryMap } from "@/components/simulator/map";
+import { OptimizerDashboard } from "@/components/simulator/optimizer";
 
 const SAMPLE_LEVEL_URL = "/examples/level4-sample.json";
 
@@ -237,8 +239,17 @@ export default function SimulatorPage() {
 					) : null}
 
 					<div className='mt-5 flex flex-wrap gap-3'>
+						<OptimizerDashboard 
+							level={levelConfig} 
+							onStrategyFound={(plan) => {
+								setStrategyPlan(plan);
+								setStrategyOutput(deterministicJsonStringify(plan));
+								setStatusMessage("Optimized strategy generated automatically.");
+							}} 
+						/>
+						
 						<button className='px-4 py-2 bg-danger text-white text-xs font-bold uppercase tracking-wider rounded-md hover:bg-danger/80 transition-colors' onClick={onGenerateStrategy} type='button'>
-							Generate Strategy
+							Generate Target Strategy
 						</button>
 						<button className='px-4 py-2 bg-white text-black text-xs font-bold uppercase tracking-wider rounded-md hover:bg-white/80 transition-colors' onClick={onRunSimulation} type='button'>
 							Run Simulation
@@ -261,7 +272,8 @@ export default function SimulatorPage() {
 						<span className='w-2 h-6 bg-danger rounded-sm' />
 						3. Telemetry Results
 					</h2>
-					<div className='grid gap-4 sm:grid-cols-2 md:grid-cols-4'>
+					<TelemetryMap segments={levelConfig?.track.segments || []} result={simulationResult} isActive={true} />
+					<div className='grid gap-4 sm:grid-cols-2 md:grid-cols-4 mt-6'>
 						<div className='rounded-xl bg-black/40 border border-white/5 p-4 flex flex-col justify-between'>
 							<div className='flex items-center gap-2 mb-2'>
 								<div className='w-2 h-2 rounded-full bg-blue-500'></div>
