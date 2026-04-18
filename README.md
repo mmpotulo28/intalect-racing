@@ -1,42 +1,56 @@
-# Next.js & HeroUI Template
+# Entelect Grand Prix Strategy Platform
 
-This is a template for creating applications using Next.js 15 (app directory) and HeroUI (v3).
+Browser-based strategy planning and simulation platform for Entelect Grand Prix, built with Next.js and HeroUI.
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
+## Documentation
 
-## Technologies Used
+Complete project docs are available in:
+
+- [docs/README.md](docs/README.md)
+
+This documentation includes:
+
+- PRD
+- Architecture plan
+- Development plan
+- Algorithms and formulas reference
+- Detailed implementation backlog
+- Test strategy
+- Success checklist
+
+## Tech Stack
 
 - [Next.js 15](https://nextjs.org/docs/getting-started)
 - [HeroUI v3](https://heroui.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
 - [TypeScript](https://www.typescriptlang.org/)
 - [next-themes](https://github.com/pacocoursey/next-themes)
 
-## How to Use
+## Getting Started
 
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
+Install dependencies:
 
 ```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
+pnpm install
 ```
 
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+Run development server:
 
 ```bash
-npm install
+pnpm dev
 ```
 
-### Run the development server
+Build for production:
 
 ```bash
-npm run dev
+pnpm build
+pnpm start
 ```
+
+## Current Focus
+
+The current documentation is designed around full Level 1-4 support, deterministic outputs, and advanced optimization workflows.
 
 ## License
 
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+Licensed under the [MIT license](LICENSE).
