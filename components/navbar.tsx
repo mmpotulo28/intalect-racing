@@ -85,7 +85,7 @@ export const Navbar = () => {
 					<div className='hidden lg:flex ml-2'>{searchInput}</div>
 					<div className='hidden md:flex ml-2'>
 						<NextLink href='/simulator'>
-							<Button className='text-sm font-bold uppercase tracking-wider bg-danger text-white hover:bg-danger/80 border-none' variant='flat' radius='sm'>
+							<Button className='text-sm font-bold uppercase tracking-wider bg-danger text-white hover:bg-danger/80 border-none' variant='danger'>
 								Launch Simulator
 							</Button>
 						</NextLink>

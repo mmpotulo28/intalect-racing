@@ -331,9 +331,12 @@ export default function SimulatorPage() {
 					</div>
 
 					{simulationResult.warnings.length > 0 ? (
-						<div className='mt-4 rounded-lg border border-danger/40 bg-danger/10 p-3'>
-							<p className='text-sm font-semibold text-danger'>Simulation Warnings</p>
-							<ul className='mt-2 list-disc space-y-1 pl-5 text-sm text-danger'>
+						<div className='mt-6 rounded-xl border border-warning/40 bg-warning/10 p-4'>
+							<p className='text-xs font-bold uppercase tracking-wider text-warning flex items-center gap-2'>
+								<span className='w-2 h-2 rounded-full bg-warning'></span>
+								Telemetry Warnings
+							</p>
+							<ul className='mt-3 list-disc space-y-1 pl-5 text-sm text-warning/90'>
 								{simulationResult.warnings.slice(0, 8).map((warning) => (
 									<li key={warning}>{warning}</li>
 								))}
@@ -341,33 +344,33 @@ export default function SimulatorPage() {
 						</div>
 					) : null}
 
-					<div className='mt-4 overflow-x-auto'>
-						<table className='w-full min-w-[760px] text-left text-sm'>
-							<thead className='text-xs uppercase text-muted'>
+					<div className='mt-6 overflow-x-auto rounded-xl border border-white/5 bg-black/40'>
+						<table className='w-full min-w-[760px] text-left text-sm whitespace-nowrap'>
+							<thead className='bg-white/5 border-b border-white/10'>
 								<tr>
-									<th className='px-2 py-2'>Lap</th>
-									<th className='px-2 py-2'>Segment</th>
-									<th className='px-2 py-2'>Type</th>
-									<th className='px-2 py-2'>Weather</th>
-									<th className='px-2 py-2'>Entry</th>
-									<th className='px-2 py-2'>Exit</th>
-									<th className='px-2 py-2'>Time</th>
-									<th className='px-2 py-2'>Fuel After</th>
-									<th className='px-2 py-2'>Crash</th>
+									<th className='px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-white/50'>Lap</th>
+									<th className='px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-white/50'>Segment</th>
+									<th className='px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-white/50'>Type</th>
+									<th className='px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-white/50'>Weather</th>
+									<th className='px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-white/50'>Entry V</th>
+									<th className='px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-white/50'>Exit V</th>
+									<th className='px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-white/50'>Segment Time</th>
+									<th className='px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-white/50'>Fuel Left</th>
+									<th className='px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-white/50'>Crash</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody className='divide-y divide-white/5 text-white/70'>
 								{simulationResult.segments.slice(0, 20).map((row) => (
-									<tr className='border-t border-separator' key={`${row.lap}-${row.segment_id}`}>
-										<td className='px-2 py-2 text-foreground'>{row.lap}</td>
-										<td className='px-2 py-2 text-foreground'>{row.segment_id}</td>
-										<td className='px-2 py-2 text-foreground'>{row.segment_type}</td>
-										<td className='px-2 py-2 text-foreground'>{row.weather}</td>
-										<td className='px-2 py-2 text-foreground'>{row.entry_speed_mps.toFixed(2)}</td>
-										<td className='px-2 py-2 text-foreground'>{row.exit_speed_mps.toFixed(2)}</td>
-										<td className='px-2 py-2 text-foreground'>{row.segment_time_s.toFixed(2)}</td>
-										<td className='px-2 py-2 text-foreground'>{row.fuel_after_l.toFixed(3)}</td>
-										<td className='px-2 py-2 text-foreground'>{row.crashed ? "yes" : "no"}</td>
+									<tr className='hover:bg-white/5 transition-colors' key={`${row.lap}-${row.segment_id}`}>
+										<td className='px-4 py-2 font-mono'>{row.lap}</td>
+										<td className='px-4 py-2 font-mono'>{row.segment_id}</td>
+										<td className='px-4 py-2'>{row.segment_type}</td>
+										<td className='px-4 py-2'>{row.weather}</td>
+										<td className='px-4 py-2 font-mono'>{row.entry_speed_mps.toFixed(2)}</td>
+										<td className='px-4 py-2 font-mono'>{row.exit_speed_mps.toFixed(2)}</td>
+										<td className='px-4 py-2 font-mono'>{row.segment_time_s.toFixed(2)}s</td>
+										<td className='px-4 py-2 font-mono'>{row.fuel_after_l.toFixed(3)}L</td>
+										<td className='px-4 py-2'>{row.crashed ? <span className='text-danger font-bold'>YES</span> : "No"}</td>
 									</tr>
 								))}
 							</tbody>
